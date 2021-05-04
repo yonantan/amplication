@@ -14,15 +14,26 @@ export const SchemaField = ({
   isDisabled,
   applicationId,
   entityDisplayName,
+  isSystemData,
 }: {
   propertyName: string;
   propertySchema: Schema;
   isDisabled?: boolean;
   applicationId: string;
   entityDisplayName: string;
+  isSystemData?: boolean;
 }) => {
   const fieldName = `properties.${propertyName}`;
   const label = propertySchema.title || capitalCase(propertyName);
+  console.log(
+    { propertyName },
+    { propertySchema },
+    { isDisabled },
+    { applicationId },
+    { entityDisplayName },
+    { isSystemData },
+    { propertySchema }
+  );
 
   if (propertySchema.enum) {
     if (propertySchema.enum.every((item) => typeof item === "string")) {

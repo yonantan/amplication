@@ -32,6 +32,7 @@ type Props = {
   defaultValues?: Partial<models.EntityField>;
   applicationId: string;
   entityDisplayName: string;
+  isSystemData?: boolean;
 };
 
 const FORM_SCHEMA = {
@@ -67,6 +68,7 @@ const EntityFieldForm = ({
   isDisabled,
   applicationId,
   entityDisplayName,
+  isSystemData,
 }: Props) => {
   const initialValues = useMemo(() => {
     const sanitizedDefaultValues = omit(
@@ -78,6 +80,7 @@ const EntityFieldForm = ({
       ...sanitizedDefaultValues,
     };
   }, [defaultValues]);
+  console.log(initialValues);
 
   return (
     <Formik
@@ -116,34 +119,42 @@ const EntityFieldForm = ({
             <DisplayNameField
               name="displayName"
               label="Display Name"
-              disabled={isDisabled}
+              disabled={isDisabled ? isDisabled : isSystemData}
               required
             />
-            <NameField name="name" disabled={isDisabled} required />
+            <NameField
+              name="name"
+              disabled={isDisabled ? isDisabled : isSystemData}
+              required
+            />
             <OptionalDescriptionField
               name="description"
               label="Description"
-              disabled={isDisabled}
+              disabled={isDisabled ? isDisabled : isSystemData}
             />
             <div>
               <ToggleField
                 name="required"
                 label="Required Field"
-                disabled={isDisabled}
+                disabled={isDisabled ? isDisabled : isSystemData}
               />
             </div>
             <div>
               <ToggleField
                 name="searchable"
                 label="Searchable"
-                disabled={isDisabled}
+                disabled={isDisabled ? isDisabled : isSystemData}
               />
             </div>
             {!SYSTEM_DATA_TYPES.has(formik.values.dataType) && (
-              <DataTypeSelectField label="Data Type" disabled={isDisabled} />
+              <DataTypeSelectField
+                label="Data Type"
+                disabled={isDisabled ? isDisabled : isSystemData}
+              />
             )}
             <SchemaFields
               schema={schema}
+              isSystemData={isSystemData}
               isDisabled={isDisabled}
               applicationId={applicationId}
               entityDisplayName={entityDisplayName}
