@@ -1,5 +1,5 @@
 # Use node 14.15.1 as the base image
-FROM node@sha256:bac289a6f393990e759c672d5f567553c697255d1fb858e2c62d086a2dfae44a AS node
+FROM node@sha256:ca6daf1543242acb0ca59ff425509eab7defb9452f6ae07c156893db06c7a9a4 AS node
 FROM node
 
 FROM node as base
