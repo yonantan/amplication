@@ -1,3 +1,4 @@
+import path from "path";
 import { print } from "recast";
 import { builders } from "ast-types";
 import { Module } from "../../types";
@@ -66,7 +67,7 @@ export async function createAppModule(
         const playground = configService.get("GRAPHQL_PLAYGROUND");
         const introspection = configService.get("GRAPHQL_INTROSPECTION");
         return {
-          autoSchemaFile: join(process.cwd(), 'schema.graphqls'),
+          autoSchemaFile: path.join(process.cwd(), "schema.graphqls"),
           sortSchema: true,
           playground,
           introspection: playground || introspection
